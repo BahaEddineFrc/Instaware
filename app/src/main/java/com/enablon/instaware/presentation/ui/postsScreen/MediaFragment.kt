@@ -8,24 +8,20 @@ import android.view.View
 import android.view.ViewGroup
 import com.enablon.instaware.R
 
-class PostsFragment : Fragment() {
+class MediaFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = PostsFragment()
-    }
-
-    private lateinit var viewModel: PostsViewModel
+    private lateinit var viewModel: MediaListViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_posts, container, false)
+        return inflater.inflate(R.layout.fragment_media_list, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(PostsViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(MediaListViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

@@ -1,6 +1,10 @@
 package com.enablon.instaware.domain.model
 
+import com.google.gson.annotations.SerializedName
+
 data class MediaListResponse(
-    private val data : List<Media>,
-    private val paging: Paging
+    @SerializedName("data")
+    val data : List<MediaPost>,
+    @SerializedName("paging")
+    val paging: Paging
 )

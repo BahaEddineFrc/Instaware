@@ -1,38 +1,38 @@
 package com.enablon.instaware.data.remote
 
-import com.enablon.instaware.domain.model.Media
+import com.enablon.instaware.domain.model.MediaPost
 import com.enablon.instaware.domain.model.MediaListResponse
 import com.enablon.instaware.domain.model.UserInfo
-import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Single
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface InstagramServices {
-
+    // TODO check headers
     @GET(InstagramEndPoints.USER_INFO)
     fun getUserInfo(
-        @Path("fields") fields: String = "id,media_count,account_type,username",
-        @Path("token") token: String = "IGQVJXUGhZAYmc1Y080OFNaZAndQOTVabzVrdkxpZADg2TWNGeVlQLTFTSzF3VjdWN2hFUVNCaTBPVzExZAHJsNElBNFJtT3d4TlExWVYxZAXVDLVlTQ2JNQ1lMN3BXZATZAFMVJERTZAPNkNCNno5QjUyTnY2dQZDZD"
-    ): Observable<UserInfo>
+        @Path(FIELDS_KEY) fields: String = USER_REQUEST_FIELDS,
+        @Path(TOKEN_KEY) token: String = TOKEN
+    ): Single<Response<UserInfo>>
 
     @GET(InstagramEndPoints.MEDIA_BY_ID)
     fun getMediaById(
-        @Path("mediaId") mediaId: String = "",
-        @Path("fields") fields: String = "id,caption,media_type,media_url,thumbnail_url,username,timestamp",
-        @Path("token") token: String = "IGQVJXUGhZAYmc1Y080OFNaZAndQOTVabzVrdkxpZADg2TWNGeVlQLTFTSzF3VjdWN2hFUVNCaTBPVzExZAHJsNElBNFJtT3d4TlExWVYxZAXVDLVlTQ2JNQ1lMN3BXZATZAFMVJERTZAPNkNCNno5QjUyTnY2dQZDZD"
-    ): Observable<Media>
+        @Path(MEDIA_ID_KEY) mediaId: String,
+        @Path(FIELDS_KEY) fields: String = MEDIA_REQUEST_FIELDS,
+        @Path(TOKEN_KEY) token: String = TOKEN
+    ): Single<Response<MediaPost>>
 
     @GET(InstagramEndPoints.MEDIA_LIST)
     fun getMediaList(
-        @Path("apiVersion") apiVersion: String = "v15.0",
-        @Path("userId") userId: String = "",
-        @Path("token") token: String = "IGQVJXUGhZAYmc1Y080OFNaZAndQOTVabzVrdkxpZADg2TWNGeVlQLTFTSzF3VjdWN2hFUVNCaTBPVzExZAHJsNElBNFJtT3d4TlExWVYxZAXVDLVlTQ2JNQ1lMN3BXZATZAFMVJERTZAPNkNCNno5QjUyTnY2dQZDZD"
-    ): Observable<MediaListResponse>
+        @Path(FIELDS_KEY) fields: String = MEDIA_REQUEST_FIELDS,
+        @Path(TOKEN_KEY) token: String = TOKEN
+    ): Single<Response<MediaListResponse>>
 
 
     @GET(InstagramEndPoints.MEDIA_BY_ID_CHILDREN)
     fun getMediaByIdChildren(
-        @Path("mediaId") mediaId: String = "",
-        @Path("token") token: String = "IGQVJXUGhZAYmc1Y080OFNaZAndQOTVabzVrdkxpZADg2TWNGeVlQLTFTSzF3VjdWN2hFUVNCaTBPVzExZAHJsNElBNFJtT3d4TlExWVYxZAXVDLVlTQ2JNQ1lMN3BXZATZAFMVJERTZAPNkNCNno5QjUyTnY2dQZDZD"
-    ): Observable<MediaListResponse>
+        @Path(FIELDS_KEY) mediaId: String,
+        @Path(TOKEN_KEY) token: String = TOKEN
+    ): Single<Response<MediaListResponse>>
 }

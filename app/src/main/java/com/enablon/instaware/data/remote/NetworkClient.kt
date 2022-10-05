@@ -5,11 +5,7 @@ import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 class NetworkClient {
-
-    companion object {
-        const val BASE_URL = "https://graph.instagram.com/"
-    }
-
+//val headers = mapOf()
     private var getClient: Retrofit =
         Retrofit.Builder()
             .baseUrl(BASE_URL)
