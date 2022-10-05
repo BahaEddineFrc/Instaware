@@ -1,8 +1,8 @@
 package com.enablon.instaware.di
 
-import com.enablon.instaware.domain.usecase.GetPostsUseCase
-import com.enablon.instaware.presentation.ui.postsScreen.PostsViewModel
-import com.enablon.instaware.presentation.ui.postsScreen.list.PostsListAdapter
+import com.enablon.instaware.domain.usecase.GetMediaListUseCase
+import com.enablon.instaware.presentation.ui.postsScreen.MediaListViewModel
+import com.enablon.instaware.presentation.ui.postsScreen.list.MediaListAdapter
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -12,17 +12,17 @@ import org.koin.dsl.module
 object AppModule {
     // View models
     val viewModelModule = module {
-        viewModel { PostsViewModel() }
+        viewModel { MediaListViewModel() }
     }
 
     // Use cases
     val useCasesModule = module {
-        factory { GetPostsUseCase(get()) }
+        factory { GetMediaListUseCase(get()) }
     }
 
     // UI components
     val uiComponentModule = module {
         // Posts list adapter
-        factory { params -> PostsListAdapter(get()) }
+        factory { MediaListAdapter(get()) }
     }
 }
