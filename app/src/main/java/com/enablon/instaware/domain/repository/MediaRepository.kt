@@ -4,6 +4,7 @@ import com.enablon.instaware.domain.model.MediaPost
 import com.enablon.instaware.domain.model.MediaListResponse
 import com.enablon.instaware.domain.model.UserInfo
 import io.reactivex.rxjava3.core.Single
+import org.koin.core.component.KoinComponent
 import retrofit2.Response
 
 interface MediaRepository {

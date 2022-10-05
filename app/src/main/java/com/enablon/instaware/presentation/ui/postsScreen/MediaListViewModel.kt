@@ -11,6 +11,7 @@ import com.enablon.instaware.domain.model.MediaListResponse
 import com.enablon.instaware.domain.model.MediaPost
 import com.enablon.instaware.domain.usecase.GetMediaListUseCase
 import com.enablon.instaware.common.AppResult
+import com.enablon.instaware.common.CONNECTION_ERROR_MSG
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -27,22 +28,25 @@ class MediaListViewModel : ViewModel(), KoinComponent {
     val error: LiveData<String>
         get() = _error
 
+    init {
+        getMediaList()
+    }
+
     fun getMediaList() {
         viewModelScope.launch {
             getMediaListUseCase()
                 .subscribe(
                     { result ->
                         if (result is AppResult.Success) {
-                            logi { "Server request failed getMediaListUseCase > ${result.data}" }
                             val res = result.data as MediaListResponse
                             _mediaPosts.postValue(res.data)
                         } else {
-                            loge { "Server request failed getMediaListUseCase > ${result.message}" }
+                            loge { "MediaListViewModel - getMediaListUseCase failed - reason : ${result.message}" }
                             _error.postValue(result.message ?: UNKNOWN_ERROR_MSG)
                         }
                     }, {
-                        loge { "Server request failed getMediaListUseCase > $it" }
-                        _error.postValue(it.localizedMessage ?: UNKNOWN_ERROR_MSG)
+                        loge { "MediaListViewModel - getMediaListUseCase server request failed - exception : $it" }
+                        _error.postValue(CONNECTION_ERROR_MSG)
                     }
                 )
         }

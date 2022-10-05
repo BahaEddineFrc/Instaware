@@ -5,7 +5,7 @@ const val BASE_URL = "https://graph.instagram.com/"
 
 // Requests keys
 const val FIELDS_KEY = "fields"
-const val TOKEN_KEY = "token"
+const val TOKEN_KEY = "access_token"
 const val MEDIA_ID_KEY = "mediaId"
 
 // Requests constant values

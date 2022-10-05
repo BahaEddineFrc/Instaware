@@ -1,5 +1,8 @@
 package com.enablon.instaware.common.utils
 
+import java.text.SimpleDateFormat
+import java.util.*
+
 /**
  * Format timestamp into a string of a formatted Date and Time
  *
@@ -7,10 +10,12 @@ package com.enablon.instaware.common.utils
  * @return String
  */
 fun getReadableTimeDate(timestamp: String?): String {
-    /* 2017-07-11T17:30:59+0000
-    val dateTime = Date(timestamp)
-    val dateFormat = SimpleDateFormat("EEE, d MMM yyyy", Locale.getDefault())
-    val timeFormat = SimpleDateFormat("h:mm a", Locale.getDefault())
-    return Pair(dateFormat.format(dateTime), timeFormat.format(dateTime))*/
-    return ""
+    timestamp?.let {
+        val oldDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.getDefault())
+        val date = oldDateFormat.parse(it)
+        oldDateFormat.applyPattern("EEE, d MMM yyyy 'at' h:mm a")
+        date?.let {
+            return oldDateFormat.format(it)
+        } ?: return ""
+    } ?: return ""
 }
