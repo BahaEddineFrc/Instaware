@@ -9,7 +9,7 @@ import retrofit2.Response
 
 interface MediaRepository {
     suspend fun getUserInfo(): Single<Response<UserInfo>>
-    suspend fun getMediaList(): Single<Response<MediaListResponse>>
+    suspend fun getMediaList(limit: Int, after: String?): Single<Response<MediaListResponse>>
     suspend fun getMediaById(mediaId: String): Single<Response<MediaPost>>
     suspend fun getMediaByIdChildren(mediaId: String): Single<Response<MediaListResponse>>
 }

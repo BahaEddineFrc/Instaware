@@ -1,5 +1,6 @@
 package com.enablon.instaware.presentation.ui.postsScreen.list
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.view.LayoutInflater
@@ -30,6 +31,7 @@ class MediaListAdapter(private val context: Context) :
         private val activity: Activity?
     ) : RecyclerView.ViewHolder(binding.root) {
 
+        @SuppressLint("SetTextI18n")
         fun bind(mediaPost: MediaPost) {
             with(binding) {
                 mediaTimeTextView.text = getReadableTimeDate(mediaPost.timestamp)
@@ -37,7 +39,7 @@ class MediaListAdapter(private val context: Context) :
                 mediaPost.caption?.let { caption ->
                     mediaCaptionTextView.apply {
                         isVisible = true
-                        text = "❝  ${caption}  ❞"
+                        text = "❝  $caption  ❞"
                     }
                 }
 

@@ -17,19 +17,20 @@ interface InstagramServices {
         @Query(TOKEN_KEY) token: String = TOKEN
     ): Single<Response<UserInfo>>
 
+    @GET(InstagramEndPoints.MEDIA_LIST)
+    fun getMediaList(
+        @Query(LIMIT_KEY) limit: Int,
+        @Query(AFTER_KEY) after: String?,
+        @Query(FIELDS_KEY) fields: String = MEDIA_REQUEST_FIELDS,
+        @Query(TOKEN_KEY) token: String = TOKEN
+    ): Single<Response<MediaListResponse>>
+
     @GET(InstagramEndPoints.MEDIA_BY_ID)
     fun getMediaById(
         @Path(MEDIA_ID_KEY) mediaId: String,
         @Query(FIELDS_KEY) fields: String = MEDIA_REQUEST_FIELDS,
         @Query(TOKEN_KEY) token: String = TOKEN
     ): Single<Response<MediaPost>>
-
-    @GET(InstagramEndPoints.MEDIA_LIST)
-    fun getMediaList(
-        @Query(FIELDS_KEY) fields: String = MEDIA_REQUEST_FIELDS,
-        @Query(TOKEN_KEY) token: String = TOKEN
-    ): Single<Response<MediaListResponse>>
-
 
     @GET(InstagramEndPoints.MEDIA_BY_ID_CHILDREN)
     fun getMediaByIdChildren(

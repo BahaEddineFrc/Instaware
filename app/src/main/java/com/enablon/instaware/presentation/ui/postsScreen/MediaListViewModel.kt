@@ -27,27 +27,32 @@ class MediaListViewModel : ViewModel(), KoinComponent {
     val error: LiveData<String>
         get() = _error
 
+    private var paginationIndicator: String? = null
+
     init {
         getMediaList()
     }
 
     fun getMediaList() {
-        viewModelScope.launch {
-            getMediaListUseCase()
-                .subscribe(
-                    { result ->
-                        if (result is AppResult.Success) {
-                            val res = result.data as MediaListResponse
-                            _mediaPosts.postValue(res.data)
-                        } else {
-                            loge { "MediaListViewModel - getMediaListUseCase failed - reason : ${result.message}" }
-                            _error.postValue(result.message ?: UNKNOWN_ERROR_MSG)
+        if (paginationIndicator != null || _mediaPosts.value == null)
+            viewModelScope.launch {
+                loge { "MediaListViewModel - USING AS PARAM $paginationIndicator" }
+                getMediaListUseCase(paginationIndicator)
+                    .subscribe(
+                        { result ->
+                            if (result is AppResult.Success) {
+                                val res = result.data as MediaListResponse
+                                _mediaPosts.postValue(_mediaPosts.value?.plus(res.data) ?: res.data)
+                                paginationIndicator = if(res.paging.next==null) null else res.paging.cursors.after
+                            } else {
+                                loge { "MediaListViewModel - getMediaListUseCase failed - reason : ${result.message}" }
+                                _error.postValue(result.message ?: UNKNOWN_ERROR_MSG)
+                            }
+                        }, {
+                            loge { "MediaListViewModel - getMediaListUseCase server request failed - exception : $it" }
+                            _error.postValue(CONNECTION_ERROR_MSG)
                         }
-                    }, {
-                        loge { "MediaListViewModel - getMediaListUseCase server request failed - exception : $it" }
-                        _error.postValue(CONNECTION_ERROR_MSG)
-                    }
-                )
-        }
+                    )
+            }
     }
 }
