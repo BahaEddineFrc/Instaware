@@ -4,14 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.enablon.instaware.common.AppResult
+import com.enablon.instaware.common.CONNECTION_ERROR_MSG
 import com.enablon.instaware.common.UNKNOWN_ERROR_MSG
 import com.enablon.instaware.common.utils.loge
-import com.enablon.instaware.common.utils.logi
 import com.enablon.instaware.domain.model.MediaListResponse
 import com.enablon.instaware.domain.model.MediaPost
 import com.enablon.instaware.domain.usecase.GetMediaListUseCase
-import com.enablon.instaware.common.AppResult
-import com.enablon.instaware.common.CONNECTION_ERROR_MSG
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject

@@ -76,14 +76,28 @@
                 android:text="caption"
                 android:textStyle="italic" />
 
+            <!--<androidx.appcompat.widget.AppCompatImageView />-->
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/media_image_view"
                 android:adjustViewBounds="true"
                 android:layout_marginTop="10dp"
+                android:visibility="gone"
+                tools:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/media_caption_textView"
-                android:src="@drawable/ic_no_data" />
+                android:src="@drawable/ic_no_data"/>
+
+            <com.denzcoskun.imageslider.ImageSlider
+                android:id="@+id/media_images_carousel"
+                android:visibility="gone"
+                android:layout_marginTop="10dp"
+                app:iss_error_image="@drawable/ic_no_data"
+                android:layout_width="match_parent"
+                android:layout_height="340dp"
+                android:layout_below="@+id/media_caption_textView"
+                android:src="@drawable/ic_no_data"/>
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

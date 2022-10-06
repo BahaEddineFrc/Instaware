@@ -7,9 +7,11 @@ data class MediaPost(
     @SerializedName("id")
     val id: String,
     @SerializedName("media_type")
-    val mediaType: String?, //CAROUSEL_ALBUM
+    val mediaType: String?, //CAROUSEL_ALBUM ,IMAGE
     @SerializedName("media_url")
     val mediaUrl: String?,
+    @SerializedName("children")
+    val children: MediaListResponse?,
     @SerializedName("username")
     val username: String?,
     @SerializedName("caption")
