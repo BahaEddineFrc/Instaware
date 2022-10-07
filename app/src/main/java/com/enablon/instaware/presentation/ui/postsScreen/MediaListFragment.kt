@@ -90,8 +90,13 @@ class MediaListFragment : Fragment() {
             _binding.mediaListErrorTv.text = it
         }
         // Listen to the Quote request updates -> update the UI
-        viewModel.newQuote.observe(viewLifecycleOwner) {
+        //viewModel.newQuote.observe(viewLifecycleOwner) {
             //Toast.makeText(context, it.text, Toast.LENGTH_LONG).show()
+        //}
+        _binding.fabSettings.setOnClickListener {
+            viewModel.newQuote.value?.let {
+                Toast.makeText(context, it.text, Toast.LENGTH_LONG).show()
+            }
         }
 
         viewModel.timeUsageEnded.observe(viewLifecycleOwner) {
