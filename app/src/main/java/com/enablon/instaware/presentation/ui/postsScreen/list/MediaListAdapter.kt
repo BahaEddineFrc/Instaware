@@ -6,7 +6,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -16,7 +15,7 @@ import com.denzcoskun.imageslider.models.SlideModel
 import com.enablon.instaware.common.utils.getReadableTimeDate
 import com.enablon.instaware.common.utils.loadUrl
 import com.enablon.instaware.databinding.MediaListItemBinding
-import com.enablon.instaware.domain.model.MediaPost
+import com.enablon.instaware.domain.model.media.MediaPost
 import org.koin.core.component.KoinComponent
 
 class MediaListAdapter(private val context: Context) :

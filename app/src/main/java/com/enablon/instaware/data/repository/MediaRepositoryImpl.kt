@@ -1,6 +1,6 @@
 package com.enablon.instaware.data.repository
 
-import com.enablon.instaware.data.remote.InstagramServices
+import com.enablon.instaware.data.remote.instagram.InstagramServices
 import com.enablon.instaware.domain.repository.MediaRepository
 import org.koin.core.component.KoinComponent
 

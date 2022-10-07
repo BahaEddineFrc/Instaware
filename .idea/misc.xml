@@ -3,12 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/BahaEddineFerchichi-/AndroidStudioProjects/Instaware/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1595" />
         <entry key="..\:/Users/BahaEddineFerchichi-/AndroidStudioProjects/Instaware/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1285" />
         <entry key="..\:/Users/BahaEddineFerchichi-/AndroidStudioProjects/Instaware/app/src/main/res/drawable/ic_no_data.xml" value="0.1595" />
         <entry key="..\:/Users/BahaEddineFerchichi-/AndroidStudioProjects/Instaware/app/src/main/res/drawable/loader_image_placeholder.xml" value="0.1285" />
         <entry key="..\:/Users/BahaEddineFerchichi-/AndroidStudioProjects/Instaware/app/src/main/res/layout/activity_main.xml" value="0.17091698317959847" />
         <entry key="..\:/Users/BahaEddineFerchichi-/AndroidStudioProjects/Instaware/app/src/main/res/layout/fragment_media_list.xml" value="0.11770833333333333" />
         <entry key="..\:/Users/BahaEddineFerchichi-/AndroidStudioProjects/Instaware/app/src/main/res/layout/media_list_item.xml" value="0.17864583333333334" />
+        <entry key="..\:/Users/BahaEddineFerchichi-/AndroidStudioProjects/Instaware/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1595" />
+        <entry key="..\:/Users/BahaEddineFerchichi-/AndroidStudioProjects/Instaware/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1595" />
       </map>
     </option>
   </component>

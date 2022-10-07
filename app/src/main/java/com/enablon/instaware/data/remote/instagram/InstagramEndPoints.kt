@@ -1,4 +1,6 @@
-package com.enablon.instaware.data.remote
+package com.enablon.instaware.data.remote.instagram
+
+import com.enablon.instaware.data.remote.BASE_URL
 
 object InstagramEndPoints {
     const val USER_INFO = "${BASE_URL}me"

@@ -1,4 +1,4 @@
-package com.enablon.instaware.domain.model
+package com.enablon.instaware.domain.model.media
 
 data class Paging(
     val cursors: Cursor,

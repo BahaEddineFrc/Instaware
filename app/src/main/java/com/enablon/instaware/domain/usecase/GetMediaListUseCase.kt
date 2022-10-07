@@ -3,7 +3,7 @@ package com.enablon.instaware.domain.usecase
 import com.enablon.instaware.common.AppResult
 import com.enablon.instaware.data.remote.MEDIA_COUNT_LIMIT
 import com.enablon.instaware.data.utils.parseServerResponse
-import com.enablon.instaware.domain.model.MediaListResponse
+import com.enablon.instaware.domain.model.media.MediaListResponse
 import com.enablon.instaware.domain.repository.MediaRepository
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single

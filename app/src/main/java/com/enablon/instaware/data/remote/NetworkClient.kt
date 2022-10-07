@@ -1,10 +1,11 @@
 package com.enablon.instaware.data.remote
 
+import com.enablon.instaware.data.remote.instagram.InstagramServices
+import com.enablon.instaware.data.remote.quote.QuoteServices
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
-//val headers = mapOf()
 fun provideRetrofitClient() =
     Retrofit.Builder()
         .baseUrl(BASE_URL)
@@ -14,3 +15,6 @@ fun provideRetrofitClient() =
 
 fun provideInstagramApi(): InstagramServices =
     provideRetrofitClient().create(InstagramServices::class.java)
+
+fun provideQuoteApi(): QuoteServices =
+    provideRetrofitClient().create(QuoteServices::class.java)

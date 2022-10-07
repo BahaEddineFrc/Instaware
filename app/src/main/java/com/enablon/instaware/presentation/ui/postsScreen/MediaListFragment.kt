@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -78,11 +79,13 @@ class MediaListFragment : Fragment() {
             _binding.emptyPlaceholder.isVisible = true
             _binding.customersListErrorTv.text = it
         }
+        viewModel.newQuote.observe(viewLifecycleOwner) {
+            Toast.makeText(context, it.text, Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun showLoader(isVisible: Boolean = true) {
         _binding.progressBar.isVisible = isVisible
     }
-
 
 }

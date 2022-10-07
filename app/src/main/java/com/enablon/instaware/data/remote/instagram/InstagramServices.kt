@@ -1,8 +1,9 @@
-package com.enablon.instaware.data.remote
+package com.enablon.instaware.data.remote.instagram
 
-import com.enablon.instaware.domain.model.MediaListResponse
-import com.enablon.instaware.domain.model.MediaPost
-import com.enablon.instaware.domain.model.UserInfo
+import com.enablon.instaware.data.remote.*
+import com.enablon.instaware.domain.model.media.MediaListResponse
+import com.enablon.instaware.domain.model.media.MediaPost
+import com.enablon.instaware.domain.model.user.UserInfo
 import io.reactivex.rxjava3.core.Single
 import retrofit2.Response
 import retrofit2.http.GET
