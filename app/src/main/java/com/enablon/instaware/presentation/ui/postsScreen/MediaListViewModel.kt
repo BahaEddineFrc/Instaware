@@ -71,7 +71,7 @@ class MediaListViewModel : ViewModel(), KoinComponent {
     init {
         getMediaList()
         getNewQuote()
-        setTimer()
+        launchAppUsageExpirationTimer()
     }
 
     /**
@@ -127,17 +127,27 @@ class MediaListViewModel : ViewModel(), KoinComponent {
     /**
      * Set a timer to update [timeUsageEnded]
      */
-    private var timer: Int = 50
-    private fun setTimer() {
-        viewModelScope.launch {
-            withContext(Dispatchers.Main) {
-                while (timer > 1) {
-                    timer--
-                    delay(3000)
-                }
+    private var timer = 0L
+    private var timerJob :Job? = null
+
+    private fun launchAppUsageExpirationTimer() {
+        timer = 10000
+        timerJob = viewModelScope.launch(Dispatchers.IO) {
+            while (isActive && timer > 0) {
+                delay(timer)
                 loge { "Time running out, $timer" }
                 _timeUsageEnded.postValue(true)
             }
         }
+    }
+
+    fun stopAppUsageExpirationTimer() {
+        timerJob?.cancel()
+        timer = 0
+    }
+
+    fun resetAppUsageExpirationTimer() {
+        launchAppUsageExpirationTimer()
+        launchAppUsageExpirationTimer()
     }
 }

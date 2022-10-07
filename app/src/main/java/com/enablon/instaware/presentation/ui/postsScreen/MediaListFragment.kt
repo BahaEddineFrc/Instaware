@@ -1,16 +1,18 @@
 package com.enablon.instaware.presentation.ui.postsScreen
 
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.enablon.instaware.common.utils.loge
+import com.enablon.instaware.R
 import com.enablon.instaware.databinding.FragmentMediaListBinding
 import com.enablon.instaware.presentation.ui.postsScreen.list.MediaListAdapter
 import org.koin.android.ext.android.inject
@@ -91,7 +93,7 @@ class MediaListFragment : Fragment() {
         }
         // Listen to the Quote request updates -> update the UI
         //viewModel.newQuote.observe(viewLifecycleOwner) {
-            //Toast.makeText(context, it.text, Toast.LENGTH_LONG).show()
+        //Toast.makeText(context, it.text, Toast.LENGTH_LONG).show()
         //}
         _binding.fabSettings.setOnClickListener {
             viewModel.newQuote.value?.let {
@@ -99,10 +101,10 @@ class MediaListFragment : Fragment() {
             }
         }
 
+        val dialog = displayUsageExpiredDialog(context)
         viewModel.timeUsageEnded.observe(viewLifecycleOwner) {
-            if(it){
-               // Toast.makeText(context, "Time ended", Toast.LENGTH_LONG).show()
-                loge { "Time ended" }
+            if (!dialog.isShowing && it) {
+                dialog.show()
             }
         }
     }
@@ -114,4 +116,42 @@ class MediaListFragment : Fragment() {
         _binding.progressBar.isVisible = isVisible
     }
 
+    /**
+     * Display a popup message requesting to close the application
+     */
+    private fun displayUsageExpiredDialog(context: Context): AlertDialog {
+
+        val dialogView: View = View.inflate(context, R.layout.dialog_close_app_request, null)
+
+        return AlertDialog.Builder(context)
+            .setView(dialogView)
+            .create()
+            .apply {
+
+                val negativeBtn = dialogView.findViewById<Button>(R.id.dialog_negative_btn)
+                val positiveBtn = dialogView.findViewById<Button>(R.id.dialog_positive_btn)
+                val extraBtn = dialogView.findViewById<Button>(R.id.dialog_extra_btn)
+
+                negativeBtn.setOnClickListener {
+                    viewModel.resetAppUsageExpirationTimer()
+                    dismiss()
+                }
+
+                extraBtn.setOnClickListener {
+                    viewModel.stopAppUsageExpirationTimer()
+                    dismiss()
+                }
+
+                positiveBtn.setOnClickListener {
+                    Toast.makeText(context, "Wise choice! good luck :D", Toast.LENGTH_SHORT).show()
+                    activity?.finishAffinity()
+                    dismiss()
+                }
+            }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        viewModel.stopAppUsageExpirationTimer()
+    }
 }
