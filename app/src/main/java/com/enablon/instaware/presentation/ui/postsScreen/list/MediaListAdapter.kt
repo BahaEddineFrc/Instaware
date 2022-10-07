@@ -18,13 +18,22 @@ import com.enablon.instaware.databinding.MediaListItemBinding
 import com.enablon.instaware.domain.model.media.MediaPost
 import org.koin.core.component.KoinComponent
 
-class MediaListAdapter(private val context: Context) :
+/**
+ * Media list adapter handling the display and management of the Media posts
+ */
+class MediaListAdapter :
     ListAdapter<MediaPost, MediaListAdapter.MediaListItemViewHolder>(
         MediaPost.DiffCallback()
     ), KoinComponent {
 
+    /**
+     * An activity instance used for zooming
+     */
     var activity: Activity? = null
 
+    /**
+     * Handle the binding, display and behavior of an item of the mediaList
+     */
     class MediaListItemViewHolder(
         private val binding: MediaListItemBinding,
         private val activity: Activity?
@@ -33,8 +42,14 @@ class MediaListAdapter(private val context: Context) :
         @SuppressLint("SetTextI18n")
         fun bind(mediaPost: MediaPost) {
             with(binding) {
+                // Transform the mediaPost's timestamp to a readable text
+                // Display the result date and time
                 mediaTimeTextView.text = getReadableTimeDate(mediaPost.timestamp)
+
+                // Display the publisher's username
                 mediaUsernameTextView.text = mediaPost.username
+
+                // Display the caption if it exists
                 mediaPost.caption?.let { caption ->
                     mediaCaptionTextView.apply {
                         isVisible = true
@@ -42,7 +57,10 @@ class MediaListAdapter(private val context: Context) :
                     }
                 }
 
-                var zoomableView : View? = null
+                // a variable containing the view to zoom (ImageView for IMAGE post type or ImageSlider for CAROUSEL)
+                var zoomableView: View? = null
+
+                // If the mediaPost children list is not empty (CAROUSEL), fetch their URLs and feed te the ImageSlider widget
                 mediaPost.children?.data?.takeIf { it.isNotEmpty() }?.let { imagesList ->
                     val urlList =
                         imagesList.filter { it.mediaUrl != null }
@@ -51,10 +69,12 @@ class MediaListAdapter(private val context: Context) :
                         mediaImagesCarousel.apply {
                             isVisible = true
                             setImageList(urlList)
-                            zoomableView=this
+                            zoomableView = this
                         }
                     }
-                } ?: mediaPost.mediaUrl?.let {
+                } ?:
+                // Otherwise (the post is of type TMAGE), load the mediaUrl image into the ImageView
+                mediaPost.mediaUrl?.let {
                     mediaImageView.apply {
                         loadUrl(it)
                         isVisible = true
@@ -62,6 +82,7 @@ class MediaListAdapter(private val context: Context) :
                     }
                 }
 
+                // Register the image zooming feature
                 activity?.let {
                     zoomableView?.let {
                         val builder: Zoomy.Builder = Zoomy.Builder(activity).target(zoomableView)
@@ -69,6 +90,9 @@ class MediaListAdapter(private val context: Context) :
                     }
                 }
 
+                // Display the LikeButton value
+                // Give a random value to the Liked button
+                // TODO: handle when local storage is implemented
                 mediaLikeButton.isChecked = listOf(true, false).random()
 
             }

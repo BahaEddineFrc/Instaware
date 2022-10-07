@@ -10,8 +10,10 @@ import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import org.koin.core.component.KoinComponent
 
+/**
+ * The MediaList use case handling the request and interception of the Instagram API list of media posts response
+ */
 class GetMediaListUseCase(private val postsRepository: MediaRepository) : KoinComponent {
-
     suspend operator fun invoke(after: String?): Single<AppResult<MediaListResponse?>> =
         postsRepository.getMediaList(MEDIA_COUNT_LIMIT, after)
             .map { it.parseServerResponse() }

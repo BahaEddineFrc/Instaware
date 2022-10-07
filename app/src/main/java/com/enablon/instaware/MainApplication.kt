@@ -5,7 +5,6 @@ import com.enablon.instaware.common.utils.logi
 import com.enablon.instaware.di.AppModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
-import org.koin.androidx.fragment.koin.fragmentFactory
 import org.koin.core.component.KoinComponent
 import org.koin.core.context.startKoin
 
@@ -25,9 +24,11 @@ class MainApplication : Application(), KoinComponent {
             androidLogger()
             androidContext(this@MainApplication)
             modules(
+                AppModule.networkModule,
+                AppModule.repositoryModule,
                 AppModule.viewModelModule,
                 AppModule.useCasesModule,
-                AppModule.uiComponentModule
+                AppModule.adapterModule
             )
         }
     }

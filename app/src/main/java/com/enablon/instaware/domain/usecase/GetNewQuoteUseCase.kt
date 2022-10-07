@@ -7,6 +7,9 @@ import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import org.koin.core.component.KoinComponent
 
+/**
+ * The Quote use case handling the request and interception of the Quote API response
+ */
 class GetNewQuoteUseCase(private val quoteRepository: QuoteRepository) : KoinComponent {
     suspend operator fun invoke(): Single<Quote> =
         quoteRepository.getNewQuote()

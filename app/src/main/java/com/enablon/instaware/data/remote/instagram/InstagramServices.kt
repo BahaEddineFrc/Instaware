@@ -10,6 +10,9 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
+/**
+ * Instagram API services
+ */
 interface InstagramServices {
 
     @GET(InstagramEndPoints.USER_INFO)
@@ -32,10 +35,4 @@ interface InstagramServices {
         @Query(FIELDS_KEY) fields: String = MEDIA_REQUEST_FIELDS,
         @Query(TOKEN_KEY) token: String = TOKEN
     ): Single<Response<MediaPost>>
-
-    @GET(InstagramEndPoints.MEDIA_BY_ID_CHILDREN)
-    fun getMediaByIdChildren(
-        @Path(FIELDS_KEY) mediaId: String,
-        @Query(TOKEN_KEY) token: String = TOKEN
-    ): Single<Response<MediaListResponse>>
 }

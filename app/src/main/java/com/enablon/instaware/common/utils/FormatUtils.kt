@@ -5,9 +5,6 @@ import java.util.*
 
 /**
  * Format timestamp into a string of a formatted Date and Time
- *
- * @param timestamp: String?
- * @return String
  */
 fun getReadableTimeDate(timestamp: String?): String {
     timestamp?.let {

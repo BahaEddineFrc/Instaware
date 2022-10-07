@@ -5,6 +5,9 @@ import android.util.Log
 const val GLOBAL_LOG_TAG = "ENABLON_INSTAWARE_LOGGER"
 const val CUSTOM_ERROR_TAG = "ENABLON_INSTAWARE_ERROR"
 
+/**
+ * Easy accessible Logging methods
+ */
 inline fun logFormatter(
     caller: Any,
     message: () -> String,

@@ -2,6 +2,9 @@ package com.enablon.instaware.domain.model.user
 
 import com.google.gson.annotations.SerializedName
 
+/**
+ * An Instagram user response entity
+ */
 data class UserInfo(
     @SerializedName("id")
     val id: String,

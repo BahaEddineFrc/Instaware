@@ -7,21 +7,20 @@ import com.enablon.instaware.common.utils.logi
 import org.json.JSONObject
 import retrofit2.Response
 
-fun <T> Response<T>.parseServerResponse(): AppResult<T?> {
-    val classTypeName: String = ""
-        //(javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0].typeName
-
-    return if (isSuccessful) {
-        logi { "$classTypeName succeeded > ${body()}" }
-        AppResult.Success(body())
-    } else {
-        try {
-            val jsonError = JSONObject(errorBody()!!.string())
-            loge { "$classTypeName failed > $jsonError" }
-            AppResult.Error(jsonError.toString())
-        } catch (e: Exception) {
-            loge { "$classTypeName parse response error failed > $e" }
-            AppResult.Error(UNKNOWN_ERROR_MSG)
-        }
+/**
+ * A response wrapping method that returns either the requested data or an error containing the failure message
+ */
+fun <T> Response<T>.parseServerResponse(): AppResult<T?> = if (isSuccessful) {
+    logi { "API call succeeded > ${body()}" }
+    AppResult.Success(body())
+} else {
+    try {
+        val jsonError = JSONObject(errorBody()!!.string())
+        loge { "API call failed > $jsonError" }
+        AppResult.Error(jsonError.toString())
+    } catch (e: Exception) {
+        loge { "API call parse response error failed > $e" }
+        AppResult.Error(UNKNOWN_ERROR_MSG)
     }
 }
+

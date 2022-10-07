@@ -3,11 +3,15 @@ package com.enablon.instaware.domain.model.media
 import androidx.recyclerview.widget.DiffUtil
 import com.google.gson.annotations.SerializedName
 
+/**
+ * An Instagram Media entity
+ * used by [MediaListResponse]
+ */
 data class MediaPost(
     @SerializedName("id")
     val id: String,
     @SerializedName("media_type")
-    val mediaType: String?, //CAROUSEL_ALBUM ,IMAGE
+    val mediaType: String?,
     @SerializedName("media_url")
     val mediaUrl: String?,
     @SerializedName("children")
@@ -17,8 +21,12 @@ data class MediaPost(
     @SerializedName("caption")
     val caption: String?,
     @SerializedName("timestamp")
-    val timestamp: String? // "2020-07-15T17:56:39+0000"
+    val timestamp: String?
 ) {
+    /**
+     * A class representing how to differ instances of [MediaPost]
+     * used by [com.enablon.instaware.presentation.ui.postsScreen.list.MediaListAdapter] to know when to update list items
+     */
     class DiffCallback : DiffUtil.ItemCallback<MediaPost>() {
         override fun areItemsTheSame(
             oldItem: MediaPost,
